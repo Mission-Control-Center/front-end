@@ -3,10 +3,10 @@ import React from "react";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
-import "../../stylesheets/Landing.css";
+import "./styles.css";
 
 export default function Login(props) {
-  const { handleSubmit, hasAnAccount } = props;
+  const { handleSignup, handleLogin, hasAnAccount } = props;
   
   return (
     <>
@@ -19,7 +19,7 @@ export default function Login(props) {
       <div className="split right">
         <div className="centered">
           {
-            hasAnAccount ? <LoginForm handleSubmit={handleSubmit} /> : <SignupForm />
+            hasAnAccount ? <LoginForm handleLogin={handleLogin} /> : <SignupForm handleSignup={handleSignup} />
           }
         </div>
       </div>

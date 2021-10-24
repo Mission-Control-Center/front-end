@@ -29,3 +29,8 @@
   width: "100%"; 
   background-color: "rgb(72, 172, 152, 0.5)";
 }
+
+.landing-heading {
+  color: "#212529"; 
+  margin-bottom: 50;
+}
