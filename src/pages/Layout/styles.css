@@ -1,0 +1,24 @@
+.navbar {
+  background: rgb(43, 105, 122);
+}
+
+.navbar-brand {
+  color: white;
+  margin-left: 2%;
+  font-size: 30px;
+}
+.navbar-brand:hover {
+  color: black;
+}
+
+.nav-link {
+  color: black;
+  margin: 0 20px 0 20px;
+}
+.nav-link:hover {
+  color: grey;
+}
+
+.navbar-nav {
+  margin-left: 50px;
+}
