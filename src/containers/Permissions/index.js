@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 import Permission from '../../pages/Permission';
 
@@ -11,7 +12,7 @@ function PermissionPage() {
 
   async function getPermissions() {
     const result = await axios.get('/permissions');
-    setPermissions(result.data);
+    setPermissions(_.get(result, 'data', []));
   }
   
   async function addPermission(event, params) {

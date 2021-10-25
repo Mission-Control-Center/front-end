@@ -8,7 +8,7 @@ function Layout(props) {
   return (
     <>
       <Navbar links={Links} />
-        { props.children }
+      { props.children }
       <Footer />
     </>
   )

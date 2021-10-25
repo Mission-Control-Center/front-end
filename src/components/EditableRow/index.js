@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import _ from 'lodash';
 
-import ActionModal from '../../components/ActionModal';
+import ActionModal from '../ActionModal';
 
 function EditableRow(props) {
-  const { index, dataObject, editPermission, deletePermission } = props;
+  const { 
+    index, 
+    dataObject, 
+    editObject, 
+    deleteObject, 
+    tableName, 
+    modalList,
+    permissions,
+    addSubObject,
+    deleteSubObject,
+  } = props;
 
   const [showModal, setShow] = useState(false);
-
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -18,15 +28,19 @@ function EditableRow(props) {
         <td>{_.get(dataObject, 'name', '')}</td>
         <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
         <td>  
-          <span onClick={(e) => deletePermission(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
+          <span onClick={(e) => deleteObject(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
         </td>
       </tr>
       <ActionModal
-        editTable={'Edit Permission'}
+        editTable={`Edit ${tableName}`}
         item={dataObject} 
-        onSubmit={editPermission}
+        onSubmit={editObject}
         handleClose={handleClose} 
-        showModal={showModal} 
+        showModal={showModal}
+        modalList={modalList}
+        permissions={permissions}
+        addSubObject={addSubObject}
+        deleteSubObject={deleteSubObject}
       />
     </>
   )
