@@ -14,7 +14,6 @@ function RolePage() {
   
   async function getPermissions() {
     const permissions = await axios.get('/permissions');
-    console.log(permissions, '-1')
     setPermissions(_.get(permissions, 'data', []));
   }
 
@@ -30,39 +29,50 @@ function RolePage() {
     });
   }
   
-//   async function addRole(event, params) {
-//     event.preventDefault();
-//     const { value } = params; 
+  async function addRole(event, params) {
+    event.preventDefault();
+    const { value } = params; 
     
-//     await axios.post(`/Roles/`, {
-//       name: value
-//     })
-//     setToggler(!toggler);
-//   }
+    await axios.post('/roles/', { name: value })
+    setToggler(!toggler);
+  }
 
-//   async function editRole(event, params) {
-//     event.preventDefault();
-//     const { id, value } = params; 
+  async function addRolePermission(event, params) {
+    event.preventDefault();
     
-//     await axios.patch(`/Roles/id=${id}`, {
-//       name: value
-//     })
-//     setToggler(!toggler);
-//   }
+    await axios.post('/role_permissions/', params)
+    setToggler(!toggler);
+  }
 
-//   async function deleteRole(event, id) {
-//     event.preventDefault();
-//     await axios.delete(`/Roles/id=${id}`)
-//     setToggler(!toggler);
-//   }
+  async function editRole(event, params) {
+    event.preventDefault();
+    const { id, value } = params; 
+    
+    await axios.patch(`/roles/id=${id}`, { name: value })
+    setToggler(!toggler);
+  }
+
+  async function deleteRole(event, id) {
+    event.preventDefault();
+    await axios.delete(`/roles/id=${id}`)
+    setToggler(!toggler);
+  }
+  
+  async function deleteRolePermission(event, id) {
+    event.preventDefault();
+    await axios.delete(`/role_permissions/id=${id}`)
+    setToggler(!toggler);
+  }
 
   return (
     <Role 
       data={roleData} 
       permissions={permissions}
-    //   addRole={addRole} 
-    //   editRole={editRole} 
-    //   deleteRole={deleteRole} 
+      addRole={addRole} 
+      editRole={editRole} 
+      deleteRole={deleteRole} 
+      addRolePermission={addRolePermission}
+      deleteRolePermission={deleteRolePermission}
     />
   )
 }

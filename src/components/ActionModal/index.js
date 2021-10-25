@@ -15,7 +15,10 @@ function ActionModal(props) {
     item, 
     modalList,
     permissions, 
+    addSubObject,
+    deleteSubObject,
   } = props;
+
   const [formValue, setFormValue] = useState(_.get(item, 'name', ''));
   
   async function handleSubmit(e) {
@@ -34,11 +37,10 @@ function ActionModal(props) {
             inputValue={formValue} 
             setInputValue={setFormValue} 
           />
-          <hr />
           {
-            modalList && modalList.length !== 0 && <ModalList listObject={modalList} /> 
+            modalList && modalList.length !== 0 && <ModalList listObject={modalList} deleteSubObject={deleteSubObject} /> 
           }
-          <AddItemRow items={permissions} />
+          { permissions && <AddItemRow items={permissions} mainObj={_.get(item, 'id', '')} addSubObject={addSubObject} /> }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

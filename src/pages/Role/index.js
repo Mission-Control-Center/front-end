@@ -1,6 +1,6 @@
 import { useState } from 'react'; 
-import _ from 'lodash';
 import { Button } from "react-bootstrap";
+import _ from 'lodash';
 
 import Card from '../../components/Card';
 import EditableRow from '../../components/EditableRow';
@@ -9,7 +9,15 @@ import ActionModal from '../../components/ActionModal';
 import './styles.css'
 
 function Role(props) {
-  const { data, addRole, editRole, deleteRole, permissions } = props;
+  const { 
+    data, 
+    addRole, 
+    editRole, 
+    deleteRole, 
+    permissions,
+    addRolePermission,
+    deleteRolePermission,
+  } = props;
   
   const [showModal, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -21,7 +29,6 @@ function Role(props) {
     })
   }
 
-  filterRolePermission();
   return(
     <div>
       <Card title="Roles" width="80%">
@@ -41,9 +48,11 @@ function Role(props) {
                   <EditableRow 
                     key={_.get(role, 'id', -1)}
                     index={index} 
-                    editRole={editRole}
-                    deleteRole={deleteRole}
+                    editObject={editRole}
+                    deleteObject={deleteRole}
                     dataObject={role}
+                    addSubObject={addRolePermission}
+                    deleteSubObject={deleteRolePermission}
                     tableName='Role'
                     modalList={filterRolePermission(_.get(data, 'rolePermissions', []), _.get(role, 'id'))} 
                     permissions={permissions}

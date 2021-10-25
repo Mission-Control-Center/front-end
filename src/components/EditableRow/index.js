@@ -7,11 +7,13 @@ function EditableRow(props) {
   const { 
     index, 
     dataObject, 
-    editPermission, 
-    deletePermission, 
+    editObject, 
+    deleteObject, 
     tableName, 
     modalList,
     permissions,
+    addSubObject,
+    deleteSubObject,
   } = props;
 
   const [showModal, setShow] = useState(false);
@@ -26,17 +28,19 @@ function EditableRow(props) {
         <td>{_.get(dataObject, 'name', '')}</td>
         <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
         <td>  
-          <span onClick={(e) => deletePermission(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
+          <span onClick={(e) => deleteObject(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
         </td>
       </tr>
       <ActionModal
         editTable={`Edit ${tableName}`}
         item={dataObject} 
-        onSubmit={editPermission}
+        onSubmit={editObject}
         handleClose={handleClose} 
         showModal={showModal}
         modalList={modalList}
         permissions={permissions}
+        addSubObject={addSubObject}
+        deleteSubObject={deleteSubObject}
       />
     </>
   )
