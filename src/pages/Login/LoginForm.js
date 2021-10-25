@@ -7,7 +7,6 @@ function LoginForm(props) {
   const { handleLogin } = props;
   
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
   function validateForm() {
@@ -16,11 +15,11 @@ function LoginForm(props) {
 
   return (
     <>
-      <Form onSubmit={handleLogin} style={{ width: "120%" }}>
+      <Form style={{ width: "120%" }}>
         <h1 className="landing-heading">Sign In</h1>
         
-        <FormInput label="Email" />
-        <FormInput label="Password" inputType="password" />
+        <FormInput label="Email" inputValue={email} setInputValue={setEmail} />
+        <FormInput label="Password" inputType="password" inputValue={password} setInputValue={setPassword} />
         
         <div className="d-grid gap-2">
           <Button
@@ -29,6 +28,7 @@ function LoginForm(props) {
             disabled={!validateForm()}
             size="lg"
             className="landing-submit-button"
+            onClick={(e) => handleLogin(e, { email, password })}
           >
             Submit
           </Button>

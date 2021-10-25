@@ -23,6 +23,8 @@ function Permission(props) {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +32,7 @@ function Permission(props) {
               _.map(data, (permission, index) => {
                 return (
                   <EditableRow 
-                    key={index}
+                    key={_.get(permission, 'id', -1)}
                     index={index} 
                     editPermission={editPermission}
                     deletePermission={deletePermission}
