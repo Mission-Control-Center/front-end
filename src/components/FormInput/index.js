@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 
 function FormInput(props) {
-  const { label, inputType, controllerId } = props;
+  const { label, inputType, controllerId, inputValue, setInputValue } = props;
 
-  const [inputValue, setInputValue] = useState(''); 
-  
   return (
     <>
       <Form.Group size="lg" controlId={controllerId || label}>

@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 function Navbar(props) {
   const { links } = props;
-  console.log("MAAMMAMA", links)
+  
   return (
     <>
       <nav class="navbar navbar-expand-lg">
@@ -11,9 +11,9 @@ function Navbar(props) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ">
             {
-              _.map(links, link => {
+              _.map(links, (link, key) => {
                 return (
-                  <a class="nav-link nav-link" href="#">{link.name}</a>
+                  <a class="nav-link nav-link" href="#" key={key}>{link.name}</a>
                 )
               })
             }

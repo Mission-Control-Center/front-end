@@ -20,7 +20,7 @@ function SignupForm(props) {
   return (
     <>
       <Form onSubmit={handleSingup} style={{ width: "120%" }}>
-        <h1 class="landing-heading">Signup</h1>
+        <h1 className="landing-heading">Signup</h1>
         
         <FormInput label="Username" />
         <FormInput label="Email" />
@@ -33,7 +33,7 @@ function SignupForm(props) {
             type="submit" 
             disabled={!validateForm()} 
             size="lg"
-            class="landing-submit-button"
+            className="landing-submit-button"
           >
             Submit
           </Button>

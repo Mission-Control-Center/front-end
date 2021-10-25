@@ -17,7 +17,7 @@ function LoginForm(props) {
   return (
     <>
       <Form onSubmit={handleLogin} style={{ width: "120%" }}>
-        <h1 class="landing-heading">Sign In</h1>
+        <h1 className="landing-heading">Sign In</h1>
         
         <FormInput label="Email" />
         <FormInput label="Password" inputType="password" />
@@ -28,7 +28,7 @@ function LoginForm(props) {
             type="submit"
             disabled={!validateForm()}
             size="lg"
-            class="landing-submit-button"
+            className="landing-submit-button"
           >
             Submit
           </Button>
