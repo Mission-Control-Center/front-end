@@ -3,9 +3,19 @@ import { Modal, Button } from "react-bootstrap";
 import _ from 'lodash';
 
 import FormInput from '../FormInput';
+import ModalList from "./ModalList";
+import AddItemRow from "./AddItemRow";
 
 function ActionModal(props) {
-  const { onSubmit, handleClose, showModal, editTable, item } = props;
+  const { 
+    onSubmit, 
+    handleClose, 
+    showModal, 
+    editTable, 
+    item, 
+    modalList,
+    permissions, 
+  } = props;
   const [formValue, setFormValue] = useState(_.get(item, 'name', ''));
   
   async function handleSubmit(e) {
@@ -24,6 +34,11 @@ function ActionModal(props) {
             inputValue={formValue} 
             setInputValue={setFormValue} 
           />
+          <hr />
+          {
+            modalList && modalList.length !== 0 && <ModalList listObject={modalList} /> 
+          }
+          <AddItemRow items={permissions} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

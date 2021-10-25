@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import _ from 'lodash';
 
-import ActionModal from '../../components/ActionModal';
+import ActionModal from '../ActionModal';
 
 function EditableRow(props) {
-  const { index, dataObject, editPermission, deletePermission } = props;
+  const { 
+    index, 
+    dataObject, 
+    editPermission, 
+    deletePermission, 
+    tableName, 
+    modalList,
+    permissions,
+  } = props;
 
   const [showModal, setShow] = useState(false);
-
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -22,11 +30,13 @@ function EditableRow(props) {
         </td>
       </tr>
       <ActionModal
-        editTable={'Edit Permission'}
+        editTable={`Edit ${tableName}`}
         item={dataObject} 
         onSubmit={editPermission}
         handleClose={handleClose} 
-        showModal={showModal} 
+        showModal={showModal}
+        modalList={modalList}
+        permissions={permissions}
       />
     </>
   )
