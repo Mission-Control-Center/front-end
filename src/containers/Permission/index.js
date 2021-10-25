@@ -5,11 +5,12 @@ import Permission from '../../pages/Permission';
 
 function PermissionPage() {
   const [permissions, setPermissions] = useState([]);
+  const [toggler, setToggler] = useState(false);
 
-  useEffect(() => getPermissions(), [addPermission, editPermission, deletePermission]);
+  useEffect(() => getPermissions(), [toggler]);
 
   async function getPermissions() {
-    const result = await axios.get('http://localhost:3000/permissions')
+    const result = await axios.get('/permissions')
     setPermissions(result.data);
   }
   
@@ -17,23 +18,26 @@ function PermissionPage() {
     event.preventDefault();
     const { value } = params; 
     
-    await axios.post(`http://localhost:3000/permissions/`, {
+    await axios.post(`/permissions/`, {
       name: value
     })
+    setToggler(!toggler);
   }
 
   async function editPermission(event, params) {
     event.preventDefault();
     const { id, value } = params; 
     
-    await axios.patch(`http://localhost:3000/permissions/id=${id}`, {
+    await axios.patch(`/permissions/id=${id}`, {
       name: value
     })
+    setToggler(!toggler);
   }
 
   async function deletePermission(event, id) {
     event.preventDefault();
-    await axios.delete(`http://localhost:3000/permissions/id=${id}`)
+    await axios.delete(`/permissions/id=${id}`)
+    setToggler(!toggler);
   }
 
   return (
