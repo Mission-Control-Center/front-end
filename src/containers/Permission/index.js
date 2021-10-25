@@ -10,7 +10,7 @@ function PermissionPage() {
   useEffect(() => getPermissions(), [toggler]);
 
   async function getPermissions() {
-    const result = await axios.get('/permissions')
+    const result = await axios.get('/permissions');
     setPermissions(result.data);
   }
   

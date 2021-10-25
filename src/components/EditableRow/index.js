@@ -16,10 +16,10 @@ function EditableRow(props) {
       <tr key={index}>
         <th scope="row">{index + 1}</th>
         <td>{_.get(dataObject, 'name', '')}</td>
-        <td><div style={{display: 'flex', justifyContent: 'space-around', cursor: 'pointer'}}>
-          <span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span>
+        <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
+        <td>  
           <span onClick={(e) => deletePermission(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
-        </div></td>
+        </td>
       </tr>
       <ActionModal
         editTable={'Edit Permission'}

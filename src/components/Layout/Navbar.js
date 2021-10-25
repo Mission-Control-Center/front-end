@@ -1,8 +1,18 @@
+import { useHistory } from 'react-router';
 import _ from 'lodash';
 
+import refreshPage from '../../utils/refreshPage';
+
 function Navbar(props) {
+  const history = useHistory();
+
   const { links } = props;
   
+  function handleLogout() {
+    localStorage.removeItem('auth_token');
+    refreshPage() && history.push('/');
+  }
+
   return (
     <>
       <nav class="navbar navbar-expand-lg">
@@ -19,6 +29,11 @@ function Navbar(props) {
             }
           </ul>
         </div>
+        <button 
+          type="button" 
+          className="btn btn-primary btn-sm logout" 
+          onClick={handleLogout}
+        >Log out</button>
       </nav>
     </>
   )

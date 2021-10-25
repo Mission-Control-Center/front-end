@@ -12,13 +12,17 @@
 }
 
 .nav-link {
-  color: black;
+  color: black !important;
   margin: 0 20px 0 20px;
 }
 .nav-link:hover {
-  color: grey;
+  color: grey !important;
 }
 
 .navbar-nav {
   margin-left: 50px;
+}
+
+.logout {
+margin-right: 50px !important;
 }

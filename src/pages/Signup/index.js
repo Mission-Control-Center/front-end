@@ -1,12 +1,11 @@
 import React from "react";
 
-import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
 import "./styles.css";
 
-export default function Login(props) {
-  const { handleSignup, handleLogin, hasAnAccount } = props;
+function Signup(props) {
+  const { handleSignup } = props;
   
   return (
     <>
@@ -18,11 +17,11 @@ export default function Login(props) {
 
       <div className="split right">
         <div className="centered">
-          {
-            hasAnAccount ? <LoginForm handleLogin={handleLogin} /> : <SignupForm handleSignup={handleSignup} />
-          }
+          <SignupForm handleSignup={handleSignup} />
         </div>
       </div>
     </>
   );
 }
+
+export default Signup;
