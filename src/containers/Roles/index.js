@@ -60,6 +60,7 @@ function RolePage() {
   
   async function deleteRolePermission(event, id) {
     event.preventDefault();
+    
     await axios.delete(`/role_permissions/id=${id}`)
     setToggler(!toggler);
   }

@@ -23,7 +23,7 @@ function Navbar(props) {
             {
               _.map(links, (link, key) => {
                 return (
-                  <a class="nav-link nav-link" href="#" key={key}>{link.name}</a>
+                  <a class="nav-link nav-link" href={link.path} key={key}>{link.name}</a>
                 )
               })
             }

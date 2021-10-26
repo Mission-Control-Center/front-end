@@ -11,7 +11,7 @@ function ActionModal(props) {
     onSubmit, 
     handleClose, 
     showModal, 
-    editTable, 
+    tableName, 
     item, 
     modalList,
     permissions, 
@@ -29,7 +29,7 @@ function ActionModal(props) {
     <>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{editTable}</Modal.Title>
+          <Modal.Title>Edit {tableName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormInput 
@@ -38,9 +38,21 @@ function ActionModal(props) {
             setInputValue={setFormValue} 
           />
           {
-            modalList && modalList.length !== 0 && <ModalList listObject={modalList} deleteSubObject={deleteSubObject} /> 
+            modalList && modalList.length !== 0 && 
+              (<ModalList 
+                tableName='Permissions' 
+                listObject={modalList} 
+                deleteSubObject={deleteSubObject} 
+              />) 
           }
-          { permissions && <AddItemRow items={permissions} mainObj={_.get(item, 'id', '')} addSubObject={addSubObject} /> }
+          { permissions && 
+              <AddItemRow 
+                title="Add Permissions" 
+                items={permissions} 
+                mainObj={_.get(item, 'id', '')} 
+                addSubObject={addSubObject} 
+              /> 
+          }
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

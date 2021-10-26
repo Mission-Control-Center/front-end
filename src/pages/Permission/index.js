@@ -34,8 +34,9 @@ function Permission(props) {
                   <EditableRow 
                     key={_.get(permission, 'id', -1)}
                     index={index} 
-                    editPermission={editPermission}
-                    deletePermission={deletePermission}
+                    tableName='Permission'
+                    editObject={editPermission}
+                    deleteObject={deletePermission}
                     dataObject={permission} 
                   />
                 )
