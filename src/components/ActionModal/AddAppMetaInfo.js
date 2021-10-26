@@ -1,29 +1,43 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import _ from 'lodash';
 
 import FormInput from '../FormInput';
-import ModalList from "./ModalList";
-import AddItemRow from "./AddItemRow";
 
-function ActionModal(props) {
-  const { 
+function UserSelect({title, setItemVal, users}) {
+  return (
+    <Form.Select aria-label="manager-select" onChange={(e) => setItemVal(e.target.value)}>
+      <option>{title}</option>
+      {
+        _.map(users, it => (
+          <option value={_.get(it, 'id', '')}>{_.get(it, 'email', '')}</option>
+        ))
+      }
+    </Form.Select>
+  )
+}
+
+function AddAppMetaInfo(props) {
+  const {
     onSubmit, 
     handleClose, 
     showModal, 
     editTable, 
     item, 
-    modalList,
-    permissions, 
-    addSubObject,
-    deleteSubObject,
     users,
   } = props;
 
   const [formValue, setFormValue] = useState(_.get(item, 'name', ''));
-  
+  const [userOwner, setOwner] = useState(0);
+  const [userAppManager, setAppManager] = useState(0);
+
   async function handleSubmit(e) {
-    await onSubmit(e, { id: _.get(item, 'id', ''), value: formValue })
+    await onSubmit(e, { 
+      id: _.get(item, 'id', ''), 
+      name: formValue,
+      manager_id: userAppManager,
+      owner_id: userOwner,
+    })
     handleClose();
   }
   return (
@@ -38,16 +52,12 @@ function ActionModal(props) {
             inputValue={formValue} 
             setInputValue={setFormValue} 
           />
-          {
-            modalList && modalList.length !== 0 && <ModalList listObject={modalList} deleteSubObject={deleteSubObject} /> 
-          }
-          { permissions && 
-              <AddItemRow 
-                title="Add Permissions" 
-                items={permissions} 
-                mainObj={_.get(item, 'id', '')} 
-                addSubObject={addSubObject} 
-              /> 
+          {users && 
+            <>
+              <UserSelect title="Add Owner" setItemVal={setOwner} users={users} />
+              <br />
+              <UserSelect title="Add Manager" setItemVal={setAppManager} users={users} />
+            </> 
           }
         </Modal.Body>
         <Modal.Footer>
@@ -59,7 +69,7 @@ function ActionModal(props) {
             onClick={handleClose} 
             onClick={(e) => handleSubmit(e)}
           >
-            Save Changes
+            Add Config
           </Button>
         </Modal.Footer>
       </Modal>
@@ -67,4 +77,4 @@ function ActionModal(props) {
   );
 }
 
-export default ActionModal;
+export default AddAppMetaInfo;

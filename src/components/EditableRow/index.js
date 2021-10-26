@@ -14,6 +14,9 @@ function EditableRow(props) {
     permissions,
     addSubObject,
     deleteSubObject,
+    version,
+    owner,
+    manager,
   } = props;
 
   const [showModal, setShow] = useState(false);
@@ -25,7 +28,10 @@ function EditableRow(props) {
     <>
       <tr key={index}>
         <th scope="row">{index + 1}</th>
+        { version && <td>{version}</td> }
         <td>{_.get(dataObject, 'name', '')}</td>
+        { owner && <td>{_.get(owner, 'username', '')}</td> }
+        { manager && <td>{_.get(manager, 'username', '')}</td> }
         <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
         <td>  
           <span onClick={(e) => deleteObject(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
