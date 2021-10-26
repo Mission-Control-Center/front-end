@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import _ from 'lodash';
 
 import ActionModal from '../ActionModal';
+import ConfigModal from '../ActionModal/ConfigModal';
 
 function EditableRow(props) {
   const { 
@@ -17,12 +18,23 @@ function EditableRow(props) {
     version,
     owner,
     manager,
+    users,
+    roles,
+    restoreObject,
   } = props;
 
   const [showModal, setShow] = useState(false);
   
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  function handleDelete(e, params) {
+    if (tableName === 'Configuration') {
+      deleteObject(e, _.get(params, 'app_config_id', ''));
+    } else {
+      deleteObject(e, _.get(params, 'id', ''));  
+    }
+  }
 
   return(
     <>
@@ -32,22 +44,47 @@ function EditableRow(props) {
         <td>{_.get(dataObject, 'name', '')}</td>
         { owner && <td>{_.get(owner, 'username', '')}</td> }
         { manager && <td>{_.get(manager, 'username', '')}</td> }
-        <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
-        <td>  
-          <span onClick={(e) => deleteObject(e, _.get(dataObject, 'id', ''))}><i class="bi bi-archive-fill"></i></span>
-        </td>
+        
+        {
+          restoreObject ? 
+          <td>  
+            <span onClick={(e) => restoreObject(e, _.get(dataObject, 'app_config_id', ''))}><i class="bi bi-recycle" /></span>
+          </td>
+          :
+          <>
+            <td><span onClick={handleShow}><i class="bi bi-pencil-fill"></i></span></td>
+            <td>  
+              <span onClick={(e) => handleDelete(e, dataObject)}><i class="bi bi-archive-fill" /></span>
+            </td>
+          </>
+        }
       </tr>
-      <ActionModal
-        editTable={`Edit ${tableName}`}
-        item={dataObject} 
-        onSubmit={editObject}
-        handleClose={handleClose} 
-        showModal={showModal}
-        modalList={modalList}
-        permissions={permissions}
-        addSubObject={addSubObject}
-        deleteSubObject={deleteSubObject}
-      />
+      {
+        tableName == "Configuration" ?
+        <ConfigModal
+          editTable={'Edit Config'}
+          onSubmit={editObject}
+          item={dataObject}
+          users={users}
+          roles={roles}
+          handleClose={handleClose} 
+          showModal={showModal}
+          addSubObject={addSubObject}
+          deleteSubObject={deleteSubObject}
+          modalList={modalList}
+        /> :
+        <ActionModal
+          tableName={tableName}
+          item={dataObject} 
+          onSubmit={editObject}
+          handleClose={handleClose} 
+          showModal={showModal}
+          modalList={modalList}
+          permissions={permissions}
+          addSubObject={addSubObject}
+          deleteSubObject={deleteSubObject}
+        />
+      }
     </>
   )
 }

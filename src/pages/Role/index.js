@@ -54,7 +54,10 @@ function Role(props) {
                     addSubObject={addRolePermission}
                     deleteSubObject={deleteRolePermission}
                     tableName='Role'
-                    modalList={filterRolePermission(_.get(data, 'rolePermissions', []), _.get(role, 'id'))} 
+                    modalList={_.map(
+                      filterRolePermission(_.get(data, 'rolePermissions', []), _.get(role, 'id')), 
+                      item => ({...item.permission, id: item.id})
+                    )} 
                     permissions={permissions}
                   />
                 )

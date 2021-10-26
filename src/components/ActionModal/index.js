@@ -11,13 +11,12 @@ function ActionModal(props) {
     onSubmit, 
     handleClose, 
     showModal, 
-    editTable, 
+    tableName, 
     item, 
     modalList,
     permissions, 
     addSubObject,
     deleteSubObject,
-    users,
   } = props;
 
   const [formValue, setFormValue] = useState(_.get(item, 'name', ''));
@@ -30,7 +29,7 @@ function ActionModal(props) {
     <>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{editTable}</Modal.Title>
+          <Modal.Title>Edit {tableName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormInput 
@@ -39,7 +38,12 @@ function ActionModal(props) {
             setInputValue={setFormValue} 
           />
           {
-            modalList && modalList.length !== 0 && <ModalList listObject={modalList} deleteSubObject={deleteSubObject} /> 
+            modalList && modalList.length !== 0 && 
+              (<ModalList 
+                tableName='Permissions' 
+                listObject={modalList} 
+                deleteSubObject={deleteSubObject} 
+              />) 
           }
           { permissions && 
               <AddItemRow 
